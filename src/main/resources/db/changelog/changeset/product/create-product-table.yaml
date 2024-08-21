@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-product
+      author: Svitlana Vyskrebentseva
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+              - column:
+                  name: price
+                  type: float
