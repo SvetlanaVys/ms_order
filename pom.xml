@@ -76,6 +76,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.9.1</version>
+		</dependency>
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
@@ -233,6 +238,7 @@
 				</executions>
 			</plugin>
 			<!--OPEN API Client-->
+			<!-- Issue: https://github.com/OpenAPITools/openapi-generator/issues/13124 -->
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
@@ -250,6 +256,7 @@
 							<modelNameSuffix>Dto</modelNameSuffix>
 							<generateApis>true</generateApis>
 							<generateModels>true</generateModels>
+							<configHelp>false</configHelp>
 							<configOptions>
 								<useBeanValidation>true</useBeanValidation>
 								<performBeanValidation>true</performBeanValidation>
@@ -257,6 +264,7 @@
 								<apiPackage>com.svysk.openapi.client</apiPackage>
 								<dateLibrary>java8</dateLibrary>
 								<useOptional>true</useOptional>
+								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 						</configuration>
 					</execution>
