@@ -207,11 +207,11 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
-			<!--OPEN API Server-->
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
 				<version>7.6.0</version>
+				<!--OPEN API Server-->
 				<executions>
 					<execution>
 						<goals>
