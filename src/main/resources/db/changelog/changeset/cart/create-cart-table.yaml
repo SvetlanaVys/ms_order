@@ -24,7 +24,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: product_count
+                  name: product_quantity
                   type: int
                   defaultValue: "1"
                   constraints:

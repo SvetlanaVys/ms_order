@@ -42,4 +42,17 @@ public class CartController implements CartsApi {
                 .map(cartDtoMapper::toCartDto)
                 .collect(Collectors.toList()));
     }
+
+    @Override
+    public ResponseEntity<List<CartDto>> getCartsByUser(String userId) {
+        return ResponseEntity.ok(service.findCartsByUser(userId).stream()
+                .map(cartDtoMapper::toCartDto)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public ResponseEntity<Void> sendCart(String userId) {
+        service.sendCart(service.findCartsByUser(userId));
+        return ResponseEntity.ok().build();
+    }
 }
