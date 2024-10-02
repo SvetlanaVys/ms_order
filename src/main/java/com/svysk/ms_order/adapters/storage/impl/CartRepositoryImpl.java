@@ -1,6 +1,7 @@
 package com.svysk.ms_order.adapters.storage.impl;
 
 import com.svysk.ms_order.adapters.storage.CartEntityDao;
+import com.svysk.ms_order.adapters.storage.entity.CartEntity;
 import com.svysk.ms_order.adapters.storage.mapper.CartEntityMapper;
 import com.svysk.ms_order.adapters.storage.mapper.ProductEntityMapper;
 import com.svysk.ms_order.domain.Cart;
@@ -36,9 +37,12 @@ public class CartRepositoryImpl implements CartRepository {
 
     @Override
     public Optional<Cart> findCartByUserIdAndProduct(String userId, Product product) {
-        return Optional.of(
-                cartEntityMapper.toCart( cartEntityDao.findCartByUserIdAndProduct(userId, productEntityMapper.toProductEntity(product)) )
-        );
+        CartEntity cartEntity = cartEntityDao.findCartByUserIdAndProduct(userId, productEntityMapper.toProductEntity(product));
+        if(cartEntity != null) {
+            return Optional.of(cartEntityMapper.toCart(cartEntity));
+        }
+
+        return Optional.empty();
     }
 
     @Override
