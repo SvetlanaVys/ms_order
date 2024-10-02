@@ -8,13 +8,13 @@ public class Cart {
     Long id;
     String userId;
     Product product;
-    Integer productCount = 1;
+    Integer productQuantity = 1;
 
-    public Integer incrementProductCount() {
-        return ++productCount;
+    public Integer incrementProductQuantity() {
+        return ++productQuantity;
     }
 
-    public Integer decrementProductCount() {
-        return --productCount;
+    public Integer decrementProductQuantity() {
+        return --productQuantity;
     }
 }

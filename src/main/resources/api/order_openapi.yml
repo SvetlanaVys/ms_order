@@ -58,6 +58,42 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Cart'
+  /carts/by_user/{user_id}:
+    get:
+      summary: Get all carts for selected user
+      tags:
+        - Cart
+      operationId: getCartsByUser
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of carts for selected user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cart'
+  /carts/{user_id}:
+    post:
+      summary: Send cart
+      tags:
+        - Cart
+      operationId: sendCart
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Send cart
   /carts/add_product/{user_id}:
     post:
       summary: Add product to cart
@@ -106,3 +142,6 @@ components:
           type: string
         product:
           $ref: '#/components/schemas/Product'
+        productQuantity:
+          type: integer
+          format: int64
