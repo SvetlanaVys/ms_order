@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-product
+      author: Svitlana Vyskrebentseva
+      changes:
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: "Fridge SAMSUNG RB29FSRNDSA/UA"
+              - column:
+                  name: price
+                  value: 17999.99
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: "Fridge LG GC-L257CBEC"
+              - column:
+                  name: price
+                  value: 54999.50
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: "Laptop ASUS E1504FA-BQ511 W11P"
+              - column:
+                  name: price
+                  value: 85600.00

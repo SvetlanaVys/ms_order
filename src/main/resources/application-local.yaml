@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /ms-order
+
+spring:
+  application:
+    name: ms_order
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb-order
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+# URL to delivery service
+delivery:
+  url: http://localhost:8081/ms-delivery

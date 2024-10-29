@@ -61,6 +61,7 @@ replay_pid*
 auto-import.
 .idea/artifacts
 .idea/compiler.xml
+.idea/dataSources.xml
 .idea/encodings.xml
 .idea/jpa-buddy.xml
 .idea/misc.xml
