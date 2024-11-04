@@ -10,9 +10,9 @@ spring:
     enabled: true
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://postgres:5432/ms-order
-    username: svadmin
-    password: Qwerty123
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
