@@ -31,7 +31,6 @@ public class CartController implements CartsApi {
 
     @Override
     public ResponseEntity<Void> addProductToCart(String userId, ProductDto productDto) {
-        System.out.println("in addProductToCart method");
         service.addProduct(userId, productDtoMapper.toProduct(productDto));
         return ResponseEntity.ok().build();
     }
@@ -41,5 +40,18 @@ public class CartController implements CartsApi {
         return ResponseEntity.ok(service.findAll().stream()
                 .map(cartDtoMapper::toCartDto)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public ResponseEntity<List<CartDto>> getCartsByUser(String userId) {
+        return ResponseEntity.ok(service.findCartsByUser(userId).stream()
+                .map(cartDtoMapper::toCartDto)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public ResponseEntity<Void> sendCart(String userId) {
+        service.sendCart(service.findCartsByUser(userId));
+        return ResponseEntity.ok().build();
     }
 }

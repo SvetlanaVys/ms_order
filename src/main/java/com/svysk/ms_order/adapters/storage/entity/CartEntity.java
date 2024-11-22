@@ -33,12 +33,12 @@ public class CartEntity {
     @JoinColumn(name="product_id")
     ProductEntity product;
 
-    Integer productCount = 1;
+    Integer productQuantity = 1;
 
-    public CartEntity(String userId, ProductEntity product, Integer productCount) {
+    public CartEntity(String userId, ProductEntity product, Integer productQuantity) {
         this.userId = userId;
         this.product = product;
-        this.productCount = productCount;
+        this.productQuantity = productQuantity;
     }
 
     @Override
