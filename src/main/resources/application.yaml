@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /ms-order
+
+spring:
+  application:
+    name: ms_order
+  liquibase:
+    enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jpa:
+    database: postgresql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: ${KAFKA_URL}
+    producer:
+      bootstrap-servers: ${KAFKA_URL}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+# Reference the environment variable
+delivery:
+  url: ${DELIVERY_URL}

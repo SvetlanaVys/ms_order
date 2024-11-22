@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.svysk</groupId>
 	<artifactId>ms_order</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<name>ms_order</name>
 	<description>Order service</description>
 	<url/>
@@ -137,6 +137,11 @@
 			<version>2.1.0</version>
 		</dependency>
 		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
@@ -144,6 +149,13 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<useFile>false</useFile>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>

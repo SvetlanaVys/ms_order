@@ -31,7 +31,6 @@ public class CartController implements CartsApi {
 
     @Override
     public ResponseEntity<Void> addProductToCart(String userId, ProductDto productDto) {
-        System.out.println("in addProductToCart method");
         service.addProduct(userId, productDtoMapper.toProduct(productDto));
         return ResponseEntity.ok().build();
     }

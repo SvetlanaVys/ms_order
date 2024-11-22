@@ -4,7 +4,7 @@ info:
   description: API for managing deliveries and products
   version: 1.0.0
 servers:
-  - url: http://localhost:8081/api
+  - url: http://localhost:8081/ms-delivery
 paths:
   /deliveries:
     get:
