@@ -20,6 +20,7 @@ The service requests delivery information from the Delivery Service through HTTP
 
 ### Running the Application Locally
 
+
 > **Note:** Make sure Kafka is running on port 9092 before starting the application, as it requires Kafka for message brokering.
 
 To run the application in IntelliJ IDEA with the local profile:
