@@ -1,10 +1,10 @@
 package com.svysk.ms_order.adapters.storage.impl;
 
 import com.svysk.ms_order.adapters.storage.CartEntityDao;
+import com.svysk.ms_order.adapters.storage.entity.CartEntity;
 import com.svysk.ms_order.adapters.storage.mapper.CartEntityMapper;
 import com.svysk.ms_order.adapters.storage.mapper.ProductEntityMapper;
 import com.svysk.ms_order.domain.Cart;
-import com.svysk.ms_order.domain.Product;
 import com.svysk.ms_order.domain.repository.CartRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,25 +27,23 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    public List<Cart> findCartByUserId(String userId) {
-        return cartEntityDao.findCartByUserId(userId)
-                .stream()
-                .map(cartEntityMapper::toCart)
-                .collect(Collectors.toList());
-    }
+    public Optional<Cart> findByUser(String userId) {
 
-    @Override
-    public Optional<Cart> findCartByUserIdAndProduct(String userId, Product product) {
-        return Optional.of(
-                cartEntityMapper.toCart( cartEntityDao.findCartByUserIdAndProduct(userId, productEntityMapper.toProductEntity(product)) )
-        );
+        Optional<CartEntity> cartEntity = cartEntityDao.findByUser(userId);
+
+        return cartEntity.map(cartEntityMapper::toCart);
+
     }
 
     @Override
     public Optional<Cart> save(Cart cart) {
+
+        CartEntity cartEntity = cartEntityMapper.toCartEntity(cart);
+        cartEntity.getCartProducts().forEach(cp -> cp.setCart(cartEntity));
+
         return Optional.of(
-                cartEntityMapper.toCart( cartEntityDao.save(cartEntityMapper.toCartEntity(cart)) )
-        );
+                cartEntityDao.save(cartEntity)
+        ).map(cartEntityMapper::toCart);
     }
 
     @Override

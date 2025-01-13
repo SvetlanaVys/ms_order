@@ -1,20 +1,45 @@
 package com.svysk.ms_order.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 @Data
+@Builder
 public class Cart {
 
-    Long id;
-    String userId;
-    Product product;
-    Integer productCount = 1;
+    private Long id;
+    private String userId;
+    private LocalDateTime createdDate;
+    private List<CartProduct> cartProducts;
 
-    public Integer incrementProductCount() {
-        return ++productCount;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return Objects.equals(id, cart.id);
     }
 
-    public Integer decrementProductCount() {
-        return --productCount;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    public void addProductToCart(Product product) {
+        CartProduct cartProduct = CartProduct.builder()
+                .product(product)
+                .productQuantity(1)
+                .build();
+
+        if(cartProducts == null) {
+            cartProducts = new ArrayList<>();
+        }
+
+        cartProducts.add(cartProduct);
     }
 }

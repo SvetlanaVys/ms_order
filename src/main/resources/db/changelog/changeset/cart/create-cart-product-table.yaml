@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cart-product
+      author: Svitlana Vyskrebentseva
+      changes:
+        - createTable:
+            tableName: cart-product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cart_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_quantity
+                  type: int
+                  defaultValue: "1"
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: cart_id
+            baseTableName: cart-product
+            baseTableSchemaName: public
+            constraintName: fk_cart_product
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: cart
+            referencedTableSchemaName: public
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: cart-product
+            baseTableSchemaName: public
+            constraintName: fk_product_cart
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: product
+            referencedTableSchemaName: public
+            validate: true
+        - addUniqueConstraint:
+            tableName: cart-product
+            columnNames: cart_id, product_id
+            constraintName: unique_cart_product
+        - createSequence:
+            sequenceName: cart_product_sequence
+            startValue: 1
+            incrementBy: 1

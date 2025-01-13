@@ -1,45 +1,41 @@
 package com.svysk.ms_order.adapters.storage.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
+import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "cart")
-@Getter
-@Setter
+@Data
 @ToString
 @RequiredArgsConstructor
 public class CartEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_sequence")
+    @SequenceGenerator(name = "cart_sequence", sequenceName = "cart_sequence", allocationSize = 1)
     private Long id;
 
     String userId;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="product_id")
-    ProductEntity product;
+    private LocalDateTime createdDate;
 
-    Integer productCount = 1;
+    @OneToMany(mappedBy="cart", cascade = CascadeType.ALL)
+    List<CartProductEntity> cartProducts = new ArrayList<>();
 
-    public CartEntity(String userId, ProductEntity product, Integer productCount) {
-        this.userId = userId;
-        this.product = product;
-        this.productCount = productCount;
-    }
 
     @Override
     public boolean equals(Object o) {
