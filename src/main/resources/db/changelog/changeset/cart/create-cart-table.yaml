@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-cart_product
+      id: create-cart
       author: Svitlana Vyskrebentseva
       changes:
         - createTable:
@@ -19,33 +19,18 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: product_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-              - column:
-                  name: product_count
-                  type: int
-                  defaultValue: "1"
-                  constraints:
-                    nullable: false
-        - addForeignKeyConstraint:
-            baseColumnNames: product_id
-            baseTableName: cart
-            baseTableSchemaName: public
-            constraintName: fk_cart_product
-            onDelete: CASCADE
-            onUpdate: RESTRICT
-            referencedColumnNames: id
-            referencedTableName: product
-            referencedTableSchemaName: public
-            validate: true
+                  name: created_date
+                  type: datetime
         - addUniqueConstraint:
-            columnNames: product_id, user_id
+            columnNames: user_id
             constraintName: const_cart_uniq
             disabled: true
             schemaName: public
             tableName: cart
             validate: true
+        - createSequence:
+            sequenceName: cart_sequence
+            startValue: 1
+            incrementBy: 1
 
 

@@ -104,5 +104,20 @@ components:
           format: int64
         userId:
           type: string
+        createdDate:
+          type: string
+          format: date-time
+        cartProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartProduct'
+    CartProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
         product:
           $ref: '#/components/schemas/Product'
+        productQuantity:
+          type: integer
