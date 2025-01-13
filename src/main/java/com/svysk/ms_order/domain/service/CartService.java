@@ -7,7 +7,7 @@ import com.svysk.ms_order.domain.Product;
 import java.util.List;
 
 public interface CartService {
-    void addProduct(String userId, Product product);
+    Cart addProduct(String userId, Product product);
 
     List<Cart> findAll();
 }

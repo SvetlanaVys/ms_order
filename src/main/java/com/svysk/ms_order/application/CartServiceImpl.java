@@ -3,6 +3,7 @@ package com.svysk.ms_order.application;
 import com.svysk.ms_order.domain.Cart;
 import com.svysk.ms_order.domain.CartProduct;
 import com.svysk.ms_order.domain.Product;
+import com.svysk.ms_order.domain.exception.CartSaveException;
 import com.svysk.ms_order.domain.exception.ProductNotFoundException;
 import com.svysk.ms_order.domain.repository.CartRepository;
 import com.svysk.ms_order.domain.repository.ProductRepository;
@@ -27,7 +28,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public void addProduct(String userId, Product product) {
+    public Cart addProduct(String userId, Product product) {
         if (userId == null || product == null) {
             throw new IllegalArgumentException("User ID and Product must not be null.");
         }
@@ -55,7 +56,13 @@ public class CartServiceImpl implements CartService {
                 () -> cart.addProductToCart(dbProduct.get())
         );
 
-        repository.save(cart);
+        Optional<Cart> savedCart = repository.save(cart);
+
+        if(savedCart.isEmpty()) {
+            throw new CartSaveException();
+        }
+
+        return savedCart.get();
     }
 
     @Override

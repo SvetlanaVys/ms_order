@@ -68,6 +68,7 @@ paths:
         - name: user_id
           in: path
           required: true
+          description: The ID of the user whose cart the product will be added to.
           schema:
             type: string
       requestBody:
@@ -78,9 +79,53 @@ paths:
               $ref: '#/components/schemas/Product'
       responses:
         '200':
-          description: Product was added
+          description: Product added to the cart successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: User ID and Product must not be null.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: User ID and Product must not be null.
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "YYYY-MM-DDThh:mm:ss.SSS"
         '404':
-          description: Product not found
+          description: Product with ID {id} does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Product with ID {id} does not exist.
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "YYYY-MM-DDThh:mm:ss.SSS"
+        '500':
+          description: Failed to save the cart.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to save the cart.
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "YYYY-MM-DDThh:mm:ss.SSS"
 
 
 components:
