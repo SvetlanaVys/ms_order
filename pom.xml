@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.svysk</groupId>
 	<artifactId>ms_order</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<name>ms_order</name>
 	<description>Order service</description>
 	<url/>
