@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-order
+      author: Svitlana Vyskrebentseva
+      changes:
+        - createTable:
+            tableName: purchase_order
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: datetime
+        - createSequence:
+            sequenceName: ordered_sequence
+            startValue: 1
+            incrementBy: 1

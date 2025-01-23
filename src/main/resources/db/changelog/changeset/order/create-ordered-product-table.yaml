@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-ordered-product
+      author: Svitlana Vyskrebentseva
+      changes:
+        - createTable:
+            tableName: ordered-product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: order_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: original_product_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_name
+                  type: varchar
+              - column:
+                  name: product_price
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_quantity
+                  type: int
+                  defaultValue: "1"
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: ordered-product
+            baseTableSchemaName: public
+            constraintName: fk_pq_delivery
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: purchase_order
+            referencedTableSchemaName: public
+            validate: true
+        - createSequence:
+            sequenceName: ordered_product_sequence
+            startValue: 1
+            incrementBy: 1

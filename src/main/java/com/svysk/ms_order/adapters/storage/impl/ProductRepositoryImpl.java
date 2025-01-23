@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Repository
@@ -34,5 +35,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Optional<Product> findById(Long id) {
         return productEntityDao.findById(id)
                 .map(productEntityMapper::toProduct);
+    }
+
+    @Override
+    public Set<Product> findByIds(Set<Long> ids) {
+        return productEntityDao.findByIds(ids).stream()
+                .map(productEntityMapper::toProduct)
+                .collect(Collectors.toSet());
     }
 }

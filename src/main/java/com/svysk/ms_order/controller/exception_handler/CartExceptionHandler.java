@@ -16,14 +16,4 @@ public class CartExceptionHandler {
     public ResponseEntity<ErrorResponse> handleCartSaveException(CartSaveException ex) {
         return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
-        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFoundException(ProductNotFoundException ex) {
-        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
-    }
 }

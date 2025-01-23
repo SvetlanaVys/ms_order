@@ -53,4 +53,14 @@ public class CartRepositoryImpl implements CartRepository {
                 .map(cartEntityMapper::toCart)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void delete(Cart cart) {
+        cartEntityDao.delete(cartEntityMapper.toCartEntity(cart));
+    }
+
+    @Override
+    public Optional<Cart> findById(Long id) {
+        return cartEntityDao.findById(id).map(cartEntityMapper::toCart);
+    }
 }

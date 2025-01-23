@@ -1,7 +1,7 @@
 package com.svysk.ms_order.controller.mapper;
 
-import com.svysk.ms_order.domain.Cart;
-import com.svysk.openapi.dto.CartDto;
+import com.svysk.ms_order.domain.Order;
+import com.svysk.openapi.dto.OrderDto;
 import org.mapstruct.Mapper;
 
 import java.time.LocalDateTime;
@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @Mapper(componentModel = "spring")
-public interface CartDtoMapper {
+public interface OrderDtoMapper {
 
     // Define a custom method to convert LocalDateTime to OffsetDateTime
     default OffsetDateTime map(LocalDateTime localDateTime) {
@@ -19,7 +19,7 @@ public interface CartDtoMapper {
         return localDateTime.atOffset(ZoneOffset.UTC);
     }
 
-    CartDto toCartDto(Cart cart);
+    OrderDto toOrderDto(Order order);
 
     // Define a custom method to convert OffsetDateTime to LocalDateTime
     default LocalDateTime offsetDateTimeToLocalDateTime(OffsetDateTime value) {
@@ -29,5 +29,5 @@ public interface CartDtoMapper {
         return value.toLocalDateTime();  // Convert OffsetDateTime to LocalDateTime
     }
 
-    Cart toCart(CartDto cart);
+    Order toOrder(OrderDto cart);
 }
