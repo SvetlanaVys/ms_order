@@ -12,9 +12,5 @@ public interface CartService {
 
     Optional<Cart> findCartsByUser(String userId);
 
-    List<Cart> findCartsByUser(String userId);
-
     List<Cart> findAll();
-
-    void sendCart(final List<Cart> cart);
 }
