@@ -118,30 +118,56 @@ components:
         price:
           type: number
           format: double
-    ProductQuantity:
+    OrderedProduct:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        cartId:
+          example: 12345
+        originalProductId:
           type: integer
-          format: int64
-        product:
-          $ref: '#/components/schemas/Product'
-        productQuantity:
+          example: 1001
+        productName:
+          type: string
+          example: "Product Name"
+        productPrice:
+          type: number
+          format: double
+          example: 99.99
+        quantity:
           type: integer
-          format: int32
+          example: 2
     Delivery:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        clientName:
+          example: 12345
+        userId:
           type: string
-          maxLength: 5
-        productQuantities:
+          example: "user_001"
+        originalOrderId:
+          type: integer
+          format: int64
+          example: 98765
+        orderedProducts:
           type: array
           items:
-            $ref: '#/components/schemas/ProductQuantity'
+            $ref: '#/components/schemas/OrderedProduct'
+        createdDate:
+          type: string
+          format: date-time
+          example: "2025-01-22T15:30:00"
+        estimatedDeliveryDate:
+          type: string
+          format: date-time
+          example: "2025-01-25T10:00:00"
+        actualDeliveryDate:
+          type: string
+          format: date-time
+          example: "2025-01-24T14:00:00"
+        trackingNumber:
+          type: string
+          example: "ABC123456"
