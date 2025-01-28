@@ -1,6 +1,7 @@
 package com.svysk.ms_order.application;
 
 import com.svysk.ms_order.application.mapper.OrderCartMapper;
+import com.svysk.ms_order.application.util.JsonUtil;
 import com.svysk.ms_order.domain.Order;
 import com.svysk.ms_order.domain.Cart;
 import com.svysk.ms_order.domain.Product;
@@ -19,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.svysk.ms_order.config.KafkaTopicConfig.ORDER_REQUEST_TOPIC;
 
 @Service
 @RequiredArgsConstructor
@@ -60,6 +63,9 @@ public class OrderServiceImpl implements OrderService {
 
         // Delete cart
         cartRepository.delete(dbCart);
+
+        // Send order to Kafka
+        this.kafkaTemplate.send(ORDER_REQUEST_TOPIC, JsonUtil.convertObjectToJson(savedOrder));
 
         return savedOrder;
     }
