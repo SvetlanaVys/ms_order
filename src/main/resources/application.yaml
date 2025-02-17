@@ -31,6 +31,34 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    io.github.resilience4j.circuitbreaker: DEBUG
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      deliveryService:
+        slidingWindowSize: 10  # Number of recent calls to consider in the failure rate calculation
+        failureRateThreshold: 50  # Percentage of failed calls to trigger OPEN state
+        slowCallRateThreshold: 50  # Percentage of slow calls to trigger OPEN state
+        slowCallDurationThreshold: 2s  # Calls taking longer than 2s are considered slow
+        minimumNumberOfCalls: 5  # Minimum calls before Circuit Breaker evaluates failure rate
+        waitDurationInOpenState: 10s  # Time to wait before transitioning from OPEN to HALF-OPEN
+        permittedNumberOfCallsInHalfOpenState: 3  # Number of calls allowed in HALF-OPEN state to check if the service has recovered
+        automaticTransitionFromOpenToHalfOpenEnabled: true  # Automatically transition from OPEN to HALF-OPEN after wait duration
+        recordExceptions:
+          - org.springframework.web.client.HttpServerErrorException  # Record 5xx HTTP errors
+          - java.util.concurrent.TimeoutException  # Record timeout exceptions
+
+  retry:
+    instances:
+      deliveryService:
+        maxAttempts: 3  # Maximum number of retry attempts
+        waitDuration: 2s  # Wait time between retries
+
 # Reference the environment variable
 delivery:
   url: ${DELIVERY_URL}

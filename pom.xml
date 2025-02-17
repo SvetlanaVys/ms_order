@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.svysk</groupId>
 	<artifactId>ms_order</artifactId>
-	<version>0.2.0</version>
+	<version>0.2.1-SNAPSHOT</version>
 	<name>ms_order</name>
 	<description>Order service</description>
 	<url/>
@@ -90,6 +90,21 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${mapstruct.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-spring-boot2</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+
+
 		<!--OPEN API DEPENDENCIES-->
 		<dependency>
 			<groupId>org.openapitools</groupId>

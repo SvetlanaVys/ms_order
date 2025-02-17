@@ -88,6 +88,8 @@ paths:
                 $ref: '#/components/schemas/Delivery'
         '404':
           description: Delivery not found
+        '500':
+          description: Internal Server Error - The update operation failed due to a server-side issue.
     delete:
       summary: Delete a delivery by ID
       tags:
